@@ -2,12 +2,13 @@ package app
 
 import (
 	"fmt"
-	"github.com/jmoiron/sqlx"
-	"github.com/joho/godotenv"
-	"github.com/sguter90/golang-vue-boilerplate/internal/app/repository"
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/jmoiron/sqlx"
+	"github.com/joho/godotenv"
+	"github.com/sguter90/golang-vue-boilerplate/internal/app/repository"
 )
 
 type AppConfig struct {
@@ -48,7 +49,7 @@ func NewApp() App {
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatalf("Error reading .env file: %s", err)
+		log.Printf("Error reading .env file: %s", err)
 	}
 
 	conn, _, err := repository.ConnectDb()

@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+    app:
+        image: app:latest
+        build: 
+            dockerfile: docker/Dockerfile
+            context: ./
+        command: "serve"
+        ports:
+            - ${APP_SERVE_PORT}:${APP_SERVE_PORT}
+        environment: 
+            - APP_SERVE_PORT=8044
+            - DB_DIALECT=mysql
+            - DB_HOST=db
+            - DB_PORT=3306
+            - DB_USER=app
+            - DB_PASS=app
+            - DB_NAME=app
+
+    db:
+        image: mariadb:10.3
+        environment:
+            # - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+            - MYSQL_RANDOM_ROOT_PASSWORD=1
+            - MYSQL_USER=${DB_USER}
+            - MYSQL_PASSWORD=${DB_PASS}
+            - MYSQL_DATABASE=${DB_NAME}
